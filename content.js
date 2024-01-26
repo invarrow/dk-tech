@@ -122,15 +122,9 @@ var heatdata = {
   max: max,
   data: points
 };
-// if you have a set of datapoints always use setData instead of addData
-// for data initialization
 heatmapInstance.setData(heatdata);
 }
 
-
-
-
-// Call the function to send the request
 sendBase64ImageRequest(imageElement);
   }
 });
