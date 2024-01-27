@@ -38,6 +38,8 @@ The extension should now be loaded. You will see the Ethical Eye icon in your Ch
 **Usage** 🌈
 Once the extension is loaded, you can start using its features to enhance your browsing experience. Refer to the extension's documentation for specific functionalities and keyboard shortcuts.
 
+**Demo of our Dark pattern Detection Model[ Heatmap ]**
+![Heat map](https://github.com/invarrow/dk-tech/raw/main/images/image_2024-01-27_222827543.png)
 
 **Demo of our Llava model**
 
