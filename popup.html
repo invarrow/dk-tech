@@ -1,11 +1,136 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Screenshot Extension</title>
-  <script src="popup.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+      background-color: #000;
+      color: #fff;
+      padding: 30px;
+      width: 300px; /* Adjust the width as needed */
+    }
+
+    .close-button {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .btn {
+      background-color: #007bff;
+      color: #fff;
+      width: 55%;
+      border-radius: 65px;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .toggle-container {
+      margin-top: 10px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: .4s;
+    }
+
+    .slider:before {
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: -14px;
+      bottom: -4px;
+      background-color: white;
+      border-radius: 50%;
+      transition: .4s;
+      display: inline-block;
+      position: relative;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:checked+.slider:before {
+      transform: translateX(26px);
+    }
+
+    .screenshot-container {
+      height: 30vh;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    .heading {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  </style>
 </head>
+
 <body>
-  <button id="capture">Capture Screenshot</button>
-  <div id="screenshotContainer" height="30%"></div>
+  <div class="container">
+    <img src="./images/dk.png" style="height: 60%; width: 60%;"/>
+
+    <div class="heading">
+    </div>
+
+
+    <!-- <button id="openSidebar">Open Sidebar</button> -->
+
+    <button id="capture" class="btn" >Analyse Dark Patterns</button>
+    <button id="heatmap-on" class="btn" >Display Heatmap</button>
+    <button id="track" class="btn" >Track my basket</button>
+    <button id="flag" class="btn" >Flag this Page</button>
+
+    <script src="popup.js"></script>
+    <div class="toggle-container">
+      <label class="switch">
+        <input type="checkbox" id="toggleButton">
+        <span class="slider"></span>
+
+      </label>
+
+    </div>
+    <div id="screenshotContainer" class="screenshot-container"></div>
+  </div>
 </body>
+
 </html>

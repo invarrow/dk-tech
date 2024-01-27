@@ -1,20 +1,3 @@
-console.log("HERE 1");
-
-const head = document.head;
-const script= document.createElement('script');
-script.src = 'axios.js';
-script.type = 'text/javascript';
-//head.appendChild(script);
-
-//import axios from './axios.js';
-
-
-const heatscript = document.createElement('script');
-heatscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.0/heatmap.min.js';
-heatscript.type = 'text/javascript';
-//head.appendChild(heatscript);
-
-
 const now = new Date(); // Current time
 const hours = now.getHours();
 const minutes = now.getMinutes();
@@ -23,8 +6,88 @@ const milliseconds = now.getMilliseconds();
 
 console.log(`Time: ${hours}:${minutes}:${seconds}.${milliseconds}`); // Output: Time: 13:42:26.543
 
+let isTracking = false;
+
+function convertCoordinates(imageWidth, imageHeight, websiteWidth, websiteHeight, x, y) {
+    // Calculate scaling factors
+    const xScale = websiteWidth / imageWidth;
+    const yScale = websiteHeight / imageHeight;
+
+    // Convert coordinates
+    const newX = x * xScale;
+    const newY = y * yScale;
+
+    return { x: newX, y: newY };
+}
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   console.log(request.message);
+  if (request.message=== "start tracking") {
+    console.log('Tracking started');
+    isTracking = true;
+
+    // Example: Track mouse clicks
+        const mouseX = event.clientX;
+        const mouseY = event.clientY;
+
+        console.log('Mouse Click at Position:', { x: mouseX, y: mouseY });
+
+        chrome.runtime.sendMessage({
+          command: 'trackEvent',
+          event: 'mouseClick',
+          data: { x: mouseX, y: mouseY }
+        });
+
+    // Example: Track mouse hovers
+    document.addEventListener('mousemove', function(event) {
+        const mouseX = event.clientX; const mouseY = event.clientY;
+
+        console.log('Mouse Hover at Position:', { x: mouseX, y: mouseY });
+
+        // You can choose to track hover events separately or in combination with clicks
+        // Uncomment the following lines if you want to track hover events as well
+        // chrome.runtime.sendMessage({
+        //   command: 'trackEvent',
+        //   event: 'mouseHover',
+        //   data: { x: mouseX, y: mouseY }
+        // });
+    });
+
+    // Example: Track search bar interactions
+    document.getElementById('searchInput').addEventListener('input', function(event) {
+        const searchQuery = event.target.value;
+
+        // Send tracking data to the background script
+        chrome.runtime.sendMessage({
+          command: 'trackEvent',
+          event: 'searchQuery',
+          data: { searchQuery }
+        });
+    });
+
+  } else if (request.message=== 'stopTracking') {
+    isTracking = false;
+    console.log('Tracking stopped');
+  }
+  if(request.message==="clean heatmap"){
+    console.log("clean");
+
+    var heatdata = {
+      max: 100,
+      min:0,
+      data: []
+    };
+    var heatmapInstance = h337.create({
+      container: document.body,
+    });
+    heatmapInstance.setData(null);
+
+const heatmapCanvases = document.querySelectorAll(".heatmap-canvas");
+
+heatmapCanvases.forEach(canvas => {
+  canvas.parentNode.removeChild(canvas);
+});
+  }
   if (request.message === "hello from popup") {
     // Perform actions in the content script here
     // if (request.action === "sendImage") {
@@ -47,6 +110,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     overlayImg.style.left = "0px";
     overlayImg.style.opacity = "50%";
 
+
+
     // Append the image to the overlay container
     //overlayDiv.appendChild(overlayImg);
 
@@ -62,34 +127,47 @@ async function sendBase64ImageRequest( imageElement ) {
   console.log(base64Image.split(',')[1]);
 
   const apiKey = '59Pz38uciAvwSDCsuA31';
-  const url = `https://detect.roboflow.com/dk_tech/1?api_key=${apiKey}`;
+  const url = `https://detect.roboflow.com/dk_tech/1?api_key=${apiKey}&confidence=0.1`;
 
 
   const response = await fetch(url, {
     method: 'POST',
-body: base64Image,
+      body: base64Image,
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }  });
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);
   }
 
+  var width = window.innerWidth;
+  var height = window.innerHeight;
+
   const data = await response.json();
   console.log(data); // Handle the response data
-  var x =data.predictions[0].x-350;
-  var y =data.predictions[0].y-300;
-  var p_width =data.predictions[0].width;
-  var p_height =data.predictions[0].height;
+
+  // loop through the predictions
+var points = [];
+  for(var i=0;i<data.predictions.length;i++){
+  var x =data.predictions[i].x;
+  var y =data.predictions[i].y;
+  var p_width =data.predictions[i].width;
+  var p_height =data.predictions[i].height;
   console.log(innerWidth,innerHeight);
   console.log(data.width,data.height);
+
+  const newcoords = convertCoordinates(imageElement.width, imageElement.height, innerWidth, innerHeight, x,y);
+  console.log("newcoords",newcoords);
+
+  var nw_x = newcoords.x;
+  var nw_y = newcoords.y;
+
 var heatmapInstance = h337.create({
   container: document.body,
 });
 
 
 // now generate some random data
-var points = [];
-var max = 0;
+var max = 100;
 // get windows size
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -107,9 +185,9 @@ var len = 300;
 //  max = Math.max(max, val);
   var point = {
     //get center using x and p_width y and p_height
-    x: x,
-    y: y,
-    value: 10,
+    x: nw_x,
+    y: nw_y,
+    value: (data.predictions[i].confidence)*100,
     // radius configuration on point basis
     //get avg of width and height
     radius:(p_width+p_height)/2
@@ -118,11 +196,16 @@ var len = 300;
 
 //}
 // heatmap data format
+
+  }
+
 var heatdata = {
   max: max,
+  min:0,
   data: points
 };
 heatmapInstance.setData(heatdata);
+
 }
 
 sendBase64ImageRequest(imageElement);

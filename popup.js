@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-  //document.getElementById("capture").addEventListener("click", function() {
+  document.getElementById("capture").addEventListener("click", function() {
     const screenshotContainer = document.getElementById("screenshotContainer");
 
     chrome.tabs.captureVisibleTab(function(screenshotDataUrl) {
@@ -21,10 +21,19 @@ document.addEventListener("DOMContentLoaded", function() {
       chrome.tabs.sendMessage(tabs[0].id,{actions:"sendImage",imageData:screenshotDataUrl,  message: "hello from popup" });
     });
     });
-  //});
+  });
 
-    // Rest of your code...
-
+  document.getElementById("heatmap-on").addEventListener("click", function() {
+    console.log("here");
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id,{actions:"sendImage",  message: "clean heatmap" });
+    });
 });
-
-
+  document.getElementById("track").addEventListener("click", function() {
+    console.log("here");
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id,{actions:"sendImage",  message: "start tracking" });
+    });
+    // Rest of your code...
+  });
+});
