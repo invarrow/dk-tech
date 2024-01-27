@@ -1,5 +1,10 @@
+Ethical Eye provides state of the art solutions for detecting users and safegaurding from malicious dark patterns.
+Our solution packages finetuned Vision Language Model(VLM), Large Language Models(LLM) and deep learning
+
+Inspired by community notes we also crowdsource flagging of potential websites with malicious intent which is paired along AI agents which surf
+the flagged websites to verify the reportings.
+
 Ethical Eye Extension for Chrome, Firefox, Opera and Edge 👁️🌐
-Welcome to the Ethical Eye Chrome Extension repository! This extension provides a set of tools to enhance your browsing experience. Follow the instructions below to get started.
 
 Installation 🚀
 Clone the repository to your local machine:
@@ -17,7 +22,10 @@ Open Google Chrome.
 
 Navigate to the Chrome Extension Management page:
 
-Type chrome://extensions/ in the address bar and press Enter.
+Type in the address bar and press Enter.
+```
+chrome://extensions/
+```
 Alternatively, go to the Chrome menu (three dots) -> More Tools -> Extensions.
 Enable "Developer mode" in the top right corner.
 
