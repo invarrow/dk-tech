@@ -4,14 +4,14 @@ Welcome to the Ethical Eye Chrome Extension repository! This extension provides 
 Installation 🚀
 Clone the repository to your local machine:
 
-bash
-Copy code
+```
 git clone https://github.com/your-username/ethical-eye.git
+```
 Change directory to the cloned repository:
 
-bash
-Copy code
+```
 cd ethical-eye/dk-tech
+```
 Loading the Extension 🛠️
 Open Google Chrome.
 
