@@ -36,7 +36,7 @@ Select the dk-tech folder from your local machine and click "Select Folder."
 The extension should now be loaded. You will see the Ethical Eye icon in your Chrome toolbar.
 
 **Run the main.py file to launch the server**
-'''python main.py'''
+```python main.py```
 
 **Usage** 🌈
 Once the extension is loaded, you can start using its features to enhance your browsing experience. Refer to the extension's documentation for specific functionalities and keyboard shortcuts.
