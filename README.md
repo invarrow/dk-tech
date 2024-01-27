@@ -40,7 +40,7 @@ Once the extension is loaded, you can start using its features to enhance your b
 
 
 Demo of our Llava model
-[![Click to watch the video](https://github.com/invarrow/dk-tech/raw/main/videoanalysis_preview.png)](https://github.com/invarrow/dk-tech/blob/main/videoanalysis.mp4)
+[![Click to watch the video](https://img.youtube.com/vi/QJyHU2wH1zc/0.jpg)](https://www.youtube.com/watch?v=QJyHU2wH1zc)
 
 Contributing 🤝
 If you would like to contribute to the development of this extension, please follow our contribution guidelines.
