@@ -187,7 +187,7 @@ var len = 300;
     //get center using x and p_width y and p_height
     x: nw_x,
     y: nw_y,
-    value: (data.predictions[i].confidence)*100,
+    value: (data.predictions[i].confidence+15)*100,
     // radius configuration on point basis
     //get avg of width and height
     radius:(p_width+p_height)/2
