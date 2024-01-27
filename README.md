@@ -10,12 +10,12 @@ Installation 🚀
 Clone the repository to your local machine:
 
 ```
-git clone https://github.com/your-username/ethical-eye.git
+git clone https://github.com/invarrow/dk-tech.git
 ```
 Change directory to the cloned repository:
 
 ```
-cd ethical-eye/dk-tech
+cd dk-tech
 ```
 Loading the Extension 🛠️
 Open Google Chrome.
