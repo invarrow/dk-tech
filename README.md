@@ -38,6 +38,10 @@ The extension should now be loaded. You will see the Ethical Eye icon in your Ch
 Usage 🌈
 Once the extension is loaded, you can start using its features to enhance your browsing experience. Refer to the extension's documentation for specific functionalities and keyboard shortcuts.
 
+
+Demo of our Llava model
+[![Video Preview](https://github.com/invarrow/dk-tech/blob/main/videoanalysis.mp4?raw=true)](https://github.com/invarrow/dk-tech/blob/main/videoanalysis.mp4)
+
 Contributing 🤝
 If you would like to contribute to the development of this extension, please follow our contribution guidelines.
 
