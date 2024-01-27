@@ -31,10 +31,10 @@
     }
 
     .btn {
-      background-color: #007bff;
-      color: #fff;
+      background-color: #fff;
+      color: #000;
       width: 55%;
-      border-radius: 65px;
+      border-radius: 10px;
       border: none;
       padding: 10px 20px;
       margin-top: 10px;
@@ -118,15 +118,13 @@
     <button id="capture" class="btn" >Analyse Dark Patterns</button>
     <button id="heatmap-on" class="btn" >Toggle off Heatmap</button>
     <button id="track" class="btn" >Track my basket</button>
-    <button id="flag" class="btn" >Flag this Page</button>
-
+<a href="http://127.0.0.1:8000/" target="_blank" rel="noopener noreferrer">
+    <button id="analysis" class="btn" >Dark Pattern Analysis
+    </button>
+      </a>
+    <button id="flag" class="btn" >Flag this Website
+    </button>
     <script src="popup.js"></script>
-    <div class="toggle-container">
-      <label class="switch">
-        <input type="checkbox" id="toggleButton">
-        <span class="slider"></span>
-
-      </label>
 
     </div>
     <div id="screenshotContainer" class="screenshot-container"></div>
